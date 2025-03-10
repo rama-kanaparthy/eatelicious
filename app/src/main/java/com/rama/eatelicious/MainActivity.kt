@@ -4,14 +4,22 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.font.FontFamily
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.rama.eatelicious.ui.theme.EateliciousTheme
+import com.rama.eatelicious.ui.theme.Pink40
+import com.rama.eatelicious.ui.theme.Purple80
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -21,7 +29,7 @@ class MainActivity : ComponentActivity() {
             EateliciousTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Android",
+                        name = "Rama",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
@@ -32,9 +40,15 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
+    val isDarkTheme = isSystemInDarkTheme()
     Text(
         text = "Hello $name!",
-        modifier = modifier
+        color = if(isDarkTheme) Purple80 else Pink40,
+        fontSize = 30.sp,
+        fontWeight = FontWeight.Bold,
+        fontFamily = FontFamily.Monospace,
+        style = MaterialTheme.typography.bodyLarge,
+        modifier = modifier.padding(32.dp)
     )
 }
 
