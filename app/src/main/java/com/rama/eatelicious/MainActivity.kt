@@ -6,10 +6,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -23,16 +25,17 @@ import com.rama.eatelicious.ui.theme.EateliciousTheme
 import com.rama.eatelicious.ui.theme.Pink40
 import com.rama.eatelicious.ui.theme.Purple80
 
+data class Restaurant(val name: String, val tagLine: String)
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
             EateliciousTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Rama",
-                        modifier = Modifier.padding(innerPadding)
+                Surface(modifier = Modifier.fillMaxSize()) {
+                    RestaurantCard(
+                        Restaurant("Aaradya","feel home")
                     )
                 }
             }
@@ -41,18 +44,17 @@ class MainActivity : ComponentActivity() {
 }
 
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    val isDarkTheme = isSystemInDarkTheme()
-    Box(modifier=modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center){
+fun RestaurantCard(restaurant: Restaurant){
+    Column {
         Text(
-            text = "Hello $name!",
-            color = if(isDarkTheme) Purple80 else Pink40,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            fontFamily = FontFamily.Monospace,
-            style = MaterialTheme.typography.bodyLarge,
-            modifier = modifier.padding(32.dp)
+            restaurant.name,
+            style = MaterialTheme.typography.titleLarge,
+            modifier = Modifier.padding(32.dp)
+        )
+        Text(
+            restaurant.tagLine,
+            style = MaterialTheme.typography.labelSmall,
+            modifier = Modifier.padding(8.dp)
         )
     }
 
@@ -62,6 +64,8 @@ fun Greeting(name: String, modifier: Modifier = Modifier) {
 @Composable
 fun GreetingPreview() {
     EateliciousTheme {
-        Greeting("Rama")
+        RestaurantCard(
+            Restaurant("Aaradya","feel home")
+        )
     }
 }
