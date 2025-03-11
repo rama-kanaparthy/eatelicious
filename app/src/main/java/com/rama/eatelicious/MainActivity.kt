@@ -49,12 +49,12 @@ fun RestaurantCard(restaurant: Restaurant){
         Text(
             restaurant.name,
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(32.dp)
+            modifier = Modifier.padding(top = 32.dp, start =32.dp, bottom = 2.dp , end = 32.dp)
         )
         Text(
             restaurant.tagLine,
             style = MaterialTheme.typography.labelSmall,
-            modifier = Modifier.padding(8.dp)
+            modifier = Modifier.padding(top = 2.dp, start =32.dp, bottom = 32.dp , end = 32.dp)
         )
     }
 
