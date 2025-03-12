@@ -62,7 +62,12 @@ val restaurantList = listOf<Restaurant>(
     Restaurant("Aaradya2","feel home", R.drawable.restaurant_02),
     Restaurant("Aaradya3","feel home", R.drawable.restaurant_03),
     Restaurant("Aaradya4","feel home", R.drawable.restaurant_04),
-    Restaurant("Aaradya5","feel home", R.drawable.restaurant_05)
+    Restaurant("Aaradya5","feel home", R.drawable.restaurant_05),
+    Restaurant("Aaradya6","feel home", R.drawable.restaurant_06),
+    Restaurant("Aaradya7","feel home", R.drawable.restaurant_07),
+    Restaurant("Aaradya8","feel home", R.drawable.restaurant_08),
+    Restaurant("Aaradya9","feel home", R.drawable.restaurant_09),
+    Restaurant("Aaradya10","feel home", R.drawable.restaurant_10)
 )
 @Composable
 fun RestaurantList(restaurants: List<Restaurant>){
@@ -82,7 +87,7 @@ fun RestaurantCard(restaurant: Restaurant){
     Surface(
         shape = MaterialTheme.shapes.medium,
         shadowElevation = 4.dp,
-        color = Color.LightGray,
+        color = Color.White,
         modifier = Modifier.fillMaxWidth()
     ) {
         Row(modifier = Modifier.padding(8.dp)) {
