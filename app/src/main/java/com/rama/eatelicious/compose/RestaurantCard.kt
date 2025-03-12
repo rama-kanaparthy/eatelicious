@@ -20,8 +20,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.rama.eatelicious.R
 import com.rama.eatelicious.data.Restaurant
+import com.rama.eatelicious.ui.theme.EateliciousTheme
 import com.rama.eatelicious.ui.theme.Purple80
 
 
@@ -70,5 +73,16 @@ fun RestaurantCard(restaurant: Restaurant){
                 )
             }
         }
+    }
+}
+
+
+@Preview(showBackground = true, name = "restaurantPreview", showSystemUi = true,
+    device = "id:pixel_9_pro"
+)
+@Composable
+fun RestaurantCardPreview() {
+    EateliciousTheme {
+        RestaurantCard(Restaurant("Aaradya1","feel home", R.drawable.restaurant_01))
     }
 }
