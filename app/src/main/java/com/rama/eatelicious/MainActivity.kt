@@ -57,6 +57,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 }
+
 val restaurantList = listOf<Restaurant>(
     Restaurant("Aaradya1","feel home", R.drawable.restaurant_01),
     Restaurant("Aaradya2","feel home", R.drawable.restaurant_02),
@@ -69,6 +70,7 @@ val restaurantList = listOf<Restaurant>(
     Restaurant("Aaradya9","feel home", R.drawable.restaurant_09),
     Restaurant("Aaradya10","feel home", R.drawable.restaurant_10)
 )
+
 @Composable
 fun RestaurantList(restaurants: List<Restaurant>){
 
@@ -109,7 +111,7 @@ fun RestaurantCard(restaurant: Restaurant){
                 Text(
                     restaurant.name,
                     style = MaterialTheme.typography.titleLarge,
-                    modifier = Modifier.padding(top = 32.dp, start =32.dp, bottom = 2.dp , end = 32.dp)
+                    modifier = Modifier.padding(top = 8.dp, start =8.dp, bottom = 2.dp , end = 8.dp)
                 )
 
                 Spacer(Modifier.padding(4.dp))
@@ -117,13 +119,11 @@ fun RestaurantCard(restaurant: Restaurant){
                 Text(
                     restaurant.tagLine,
                     style = MaterialTheme.typography.labelSmall,
-                    modifier = Modifier.padding(top = 2.dp, start =32.dp, bottom = 32.dp , end = 32.dp)
+                    modifier = Modifier.padding(top = 2.dp, start =8.dp, bottom = 8.dp , end = 8.dp)
                 )
             }
         }
-
     }
-
 }
 
 @Preview(showBackground = true, name = "restaurantListPreview", showSystemUi = true,
