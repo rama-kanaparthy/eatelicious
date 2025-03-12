@@ -7,6 +7,7 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.CutCornerShape
@@ -29,6 +31,8 @@ import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.DropdownMenu
+import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
@@ -55,6 +59,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.modifier.modifierLocalConsumer
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.tooling.preview.Wallpapers
 import androidx.compose.ui.unit.dp
@@ -91,6 +96,97 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+fun HeaderRender(){
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                title = {
+                    Text(
+                        "Eatelicious",
+                        color = MaterialTheme.colorScheme.onPrimary
+                    )
+                },
+                colors = TopAppBarDefaults.mediumTopAppBarColors(
+                    containerColor = MaterialTheme.colorScheme.primary
+                )
+            )
+        },
+
+        ) { innerPadding ->
+            RestaurantDropDown(
+                innerPadding, restaurantList
+            )
+    }
+}
+
+@Composable
+fun RestaurantDropDown(contentPadding: PaddingValues, restaurants: List<Restaurant>){
+
+    var selectedIndex by remember { mutableStateOf(0) }
+    var expanded by remember { mutableStateOf(false) }
+
+    Card (
+        modifier = Modifier.padding(contentPadding).fillMaxWidth(),
+        shape = RectangleShape,
+        colors = CardDefaults.cardColors(
+            MaterialTheme.colorScheme.background
+        )
+    ){
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Box(
+                modifier = Modifier.fillMaxWidth().wrapContentHeight()
+            ){
+                Image(
+                    painter = painterResource(restaurants[selectedIndex].img),
+                    contentDescription = null,
+                    modifier = Modifier.align(Alignment.Center).size(350.dp).clip(CircleShape),
+                    contentScale = ContentScale.Crop
+                )
+            }
+
+            Box(
+                modifier = Modifier.fillMaxSize().wrapContentSize(Alignment.BottomCenter)
+            ){
+                Text(
+                    restaurants[selectedIndex].name,
+                    textAlign = TextAlign.Center,
+                    style = MaterialTheme.typography.titleLarge,
+                    modifier = Modifier.fillMaxWidth()
+                        .clickable(onClick = {expanded = true})
+                        .padding(top = 8.dp, bottom = 16.dp)
+                )
+                DropdownMenu(
+                    expanded = expanded,
+                    onDismissRequest = {expanded = false},
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+                    restaurants.forEachIndexed { index, s ->
+                        DropdownMenuItem(
+                            onClick = {
+                                selectedIndex = index
+                                expanded = false
+                            },
+                            text = {
+                                Card (
+                                    modifier = Modifier.padding(4.dp).fillMaxWidth(),
+                                    colors = CardDefaults.cardColors(
+                                        MaterialTheme.colorScheme.background
+                                    )
+                                ){
+                                    Text( text = s.name)
+                                }
+                            }
+                        )
+                    }
+                }
+            }
+        }
+    }
+}
 @Composable
 fun RestaurantCounter(contentPadding: PaddingValues){
     Card (
@@ -163,30 +259,7 @@ fun RestaurantCounter(contentPadding: PaddingValues){
     }
 }
 
-@Composable
-@OptIn(ExperimentalMaterial3Api::class)
-fun HeaderRender(){
-    Scaffold(
-        topBar = {
-            TopAppBar(
-                title = {
-                    Text(
-                        "Eatelicious",
-                        color = MaterialTheme.colorScheme.onPrimary
-                    )
-                },
-                colors = TopAppBarDefaults.mediumTopAppBarColors(
-                    containerColor = MaterialTheme.colorScheme.primary
-                )
-            )
-        },
 
-    ) { innerPadding ->
-        RestaurantCounter(
-            innerPadding
-        )
-    }
-}
 
 @Composable
 fun RestaurantProfile(contentPadding: PaddingValues){
