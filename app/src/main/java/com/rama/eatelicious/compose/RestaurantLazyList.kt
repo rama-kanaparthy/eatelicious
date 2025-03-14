@@ -103,10 +103,7 @@ fun RestaurantLazyRestaurantList(
         restaurants.forEach{ restaurant ->
             item{
                 Box(modifier = Modifier.padding(35.dp).fillMaxWidth()){
-                    Text(
-                        text = restaurant.name,
-                        fontSize = 20.sp
-                    )
+                    RestaurantCard(restaurant)
                 }
             }
         }
