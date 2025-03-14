@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import com.rama.eatelicious.compose.RestaurantHeaderList
 import com.rama.eatelicious.compose.RestaurantLazyList
 import com.rama.eatelicious.compose.RestaurantRating
 import com.rama.eatelicious.ui.theme.EateliciousTheme
@@ -27,7 +28,7 @@ class MainActivity : ComponentActivity() {
         setContent {
             EateliciousTheme {
                 Surface(modifier = Modifier.fillMaxSize()) {
-                    HeaderRender()
+                    RestaurantHeaderList()
                 }
             }
         }
@@ -52,8 +53,8 @@ fun HeaderRender(){
             )
         }
     ) { innerPadding ->
-        RestaurantLazyList(innerPadding)
-        //RestaurantRating(innerPadding, MainViewModel())
+
+        RestaurantRating(innerPadding, MainViewModel())
     }
 }
 
